@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'eclipse'
+}
+
+group 'com.anderyplis'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile files('C:/tibbo/aggregate/projects/linkserver-core/jar/aggregate-api.jar')
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.10.0'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-1.2-api', version: '2.10.0'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.10.0'
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+    compile group: 'org.eclipse.jetty.websocket', name: 'websocket-client', version: '9.4.10.v20180503'
+
+    testCompile 'junit:junit:4.12'
+}
+
