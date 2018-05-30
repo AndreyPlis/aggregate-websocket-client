@@ -25,8 +25,16 @@ public class DemoApplicationTests extends AbstractTestExamples {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        agent = DemoAgent.setUpDemoAgent(EVENT_PERIOD);
+        agent = AgentStartupRunner.setUpDemoAgent(EVENT_PERIOD);
     }
+
+   /* @Override
+    protected void prepareClientConnection() throws Exception {
+        RemoteServer rls = new RemoteServer("localhost", RemoteServer.DEFAULT_PORT, USERNAME, "admin");
+        rlc = new RemoteServerController(rls, true);
+        rlc.connect();
+        rlc.login();
+    }*/
 
     public void testSetVariableCount() throws Exception {
         assertEquals(0, agent.getContext().getVariableData(V_SETTING).getSetCount());
@@ -128,14 +136,14 @@ public class DemoApplicationTests extends AbstractTestExamples {
     }
 
     private void startThread(final Long eventPeriod) throws Exception {
-        agent = DemoAgent.setUpDemoAgent(eventPeriod);
+        agent = AgentStartupRunner.setUpDemoAgent(eventPeriod);
         agent.connect();
 
         final Thread eventAgent = new Thread() {
             @Override
             public void run() {
                 while (!isInterrupted()) {
-                    DemoAgent.setNewVariable(agent, eventPeriod);
+                    AgentStartupRunner.setNewVariable(agent, eventPeriod);
                     if (agent.getContext().getVariableData(V_SETTING).getSetCount() > 0) {
                         interrupt();
                         agent.disconnect();
